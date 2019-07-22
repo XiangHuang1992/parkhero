@@ -24,9 +24,13 @@ RUN addgroup -S django \
     && adduser -S -G django django
 
 # Requirements are installed here to ensure they will be cached.
-COPY ./requirements /requirements
-RUN pip install --no-cache-dir -r /requirements/production.txt \
-    && rm -rf /requirements
+# COPY ./requirements /requirements
+# RUN pip install --no-cache-dir -r /requirements/production.txt \
+#     && rm -rf /requirements
+RUN pip install --upgrade pip
+RUN pip install pipenv
+COPY ./Pipfile Pipfile
+RUN pipenv install --skip-lock --system
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint

@@ -16,8 +16,12 @@ RUN apk update \
   && apk add postgresql-client
 
 # Requirements are installed here to ensure they will be cached.
-COPY ./requirements /requirements
-RUN pip install -r /requirements/local.txt
+#COPY ./requirements /requirements
+#RUN pip install -r /requirements/local.txt
+RUN pip install --upgrade pip
+RUN pip install pipenv
+COPY ./Pipfile Pipfile
+RUN pipenv install --skip-lock --system --dev
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
