@@ -31,5 +31,21 @@ STATUS_CODE = {
     "verify_code_invalid": 20001,  # 验证码无效
     "verify_code_wait": 20002,  # 请等待验证码下发
     "phone_number_registered": 20003,  # 该手机号已被注册
+    "phone_number_not_registered": 20004,  # 该手机号未被注册
+    "user_no_profile": 20005,  # 该用户没有配置数据
+    "pay_password_err": 20006,  # 支付密码错误
+    "pay_password_not_exists": 20007,  # 没有支付密码
+    "trade_num_not_exists": 20008,  # 该订单号不存在
+    "user_password_err": 20009,  # 用户名密码错误
+    "non_administrator": 20010,  # 不是管理员
+    "non_such_user": 20011,  # 没有该用户
+    "non_such_role": 20012,  # 没有该角色
+    "username_exists": 20013,  # 用户名已存在
+    "non_operator": 20014,  # 不是操作员
+    "non_auth_del_group": 20015,  # 没有删除用户组的权限
+    "group_name_exists": 20016,  # 该用户组已存在
+    "user_inactive": 20017,  # 该用户未被激活
+
+    # 支付模块(billing)
 
 }
