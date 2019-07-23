@@ -341,3 +341,4 @@ parkhero/media/
 
 # pipenv
 Pipfile.lock
+/.vscode/settings.json
