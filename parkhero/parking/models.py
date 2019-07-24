@@ -18,7 +18,7 @@ class VehicleIn(models.Model):
     pass
 
 
-class VehicleOut(models.Model):
+class VehicleInOut(models.Model):
     pass
 
 
