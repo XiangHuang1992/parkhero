@@ -74,7 +74,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "parkhero.users.apps.UsersConfig",
-    "parkhero.account.apps.AccountConfig",
+    "parkhero.parking.apps.ParkingConfig"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -103,7 +103,8 @@ LOGIN_URL = "account_login"
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
 PASSWORD_HASHERS = [
-    # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
+    # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with
+    # -django
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
@@ -139,7 +140,8 @@ MIDDLEWARE = [
 STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting
+# -STATICFILES_DIRS
 STATICFILES_DIRS = [str(APPS_DIR.path("static"))]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
@@ -159,7 +161,8 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
     {
-        # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
+        # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES
+        # -BACKEND
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         "DIRS": [str(APPS_DIR.path("templates"))],
@@ -170,7 +173,8 @@ TEMPLATES = [
                 "django.template.loaders.filesystem.Loader",
                 "django.template.loaders.app_directories.Loader",
             ],
-            # https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
+            # https://docs.djangoproject.com/en/dev/ref/settings/#template-context
+            # -processors
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
@@ -232,7 +236,7 @@ LOGGING = {
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
+                      "%(process)d %(thread)d %(message)s"
         }
     },
     "handlers": {
@@ -248,22 +252,29 @@ LOGGING = {
 # Celery
 # ------------------------------------------------------------------------------
 if USE_TZ:
-    # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
+    # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting
+    # -timezone
     CELERY_TIMEZONE = TIME_ZONE
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-broker_url
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting
+# -broker_url
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_backend
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting
+# -result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-accept_content
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting
+# -accept_content
 CELERY_ACCEPT_CONTENT = ["json"]
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-task_serializer
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting
+# -task_serializer
 CELERY_TASK_SERIALIZER = "json"
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_serializer
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting
+# -result_serializer
 CELERY_RESULT_SERIALIZER = "json"
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-time-limit
 # TODO: set to whatever value is adequate in your circumstances
 CELERY_TASK_TIME_LIMIT = 5 * 60
-# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-soft-time-limit
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-soft-time
+# -limit
 # TODO: set to whatever value is adequate in your circumstances
 CELERY_TASK_SOFT_TIME_LIMIT = 60
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#beat-scheduler
@@ -281,7 +292,6 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_ADAPTER = "parkhero.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = "parkhero.users.adapters.SocialAccountAdapter"
-
 
 # Your stuff...
 # ------------------------------------------------------------------------------
