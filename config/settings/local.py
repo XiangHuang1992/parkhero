@@ -30,9 +30,13 @@ EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-host
-EMAIL_HOST = "localhost"
+EMAIL_HOST = "smtp.163.com"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
-EMAIL_PORT = 1025
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'lucashuang1992@163.com'
+EMAIL_HOST_PASSWORD = 'hx15502040571'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
