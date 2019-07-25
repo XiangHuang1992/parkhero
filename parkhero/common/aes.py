@@ -10,14 +10,18 @@
 # Life is Short I Use Python!!!                      ===
 # ======================================================
 """
-import  base64
+import base64
 
 from crypto.Cipher import AES
 
 
 BS = AES.block_size
-pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
-unpad = lambda s: s[0:-ord(s[-1])]
+
+
+def pad(s): return s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
+
+
+def unpad(s): return s[0:-ord(s[-1])]
 
 
 class Aes:
