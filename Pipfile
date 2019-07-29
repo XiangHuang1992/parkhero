@@ -53,6 +53,7 @@ django-anymail = {extras = ["mailgun"],version = "==6.1.0"}
 Pillow = "==6.1.0"
 rsa = "*"
 architect = "*"
+paho-mqtt = "*"
 
 [requires]
 python_version = "3.6"

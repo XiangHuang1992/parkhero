@@ -18,22 +18,64 @@ from .models import ParkingLot, ParkingGate, ParkingLotExtra, VehicleInOut
 class ParkingLotSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParkingLot
-        fields = ()
+        fields = (
+            "id",
+            "name",
+            "city_code",
+            "type",
+            "price",
+            "image",
+            "parking_space_total",
+        )
+
+
+class ParkingLotSerializer2(serializers.ModelSerializer):
+    class Meta:
+        model = ParkingLot
+        fields = (
+            "id",
+            "identifier",
+            "name",
+            "address",
+            "city_code",
+            "type",
+            "price",
+            "parking_space_total",
+            "image",
+        )
 
 
 class ParkingGateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParkingGate
-        fields = ()
+        fields = ("gateid", "longitude", "latitude", "gatename", "isdefault")
 
 
 class VehicleInOutSerializer(serializers.ModelSerializer):
+    in_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    out_time = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+
     class Meta:
         model = VehicleInOut
-        fields = ()
+        fields = (
+            "id",
+            "phone_number",
+            "park_card_num",
+            "card_type",
+            "out_time",
+            "in_time",
+            "parklot",
+        )
 
 
 class ParkingLotExtraSerializer(serializers.ModelSerializer):
     class Meta:
         model = ParkingLotExtra
-        fields = ()
+        fields = (
+            "parklot",
+            "parkspace_available",
+            "login_time",
+            "heartbeat_time",
+            "mqttip",
+            "httpip",
+        )

@@ -51,42 +51,43 @@ class PaginatorParaVerify:
             PaginatorParaVerify(pagetype),
         )
 
-    class Paginator:
-        # paginate through primary key id ,reverse order by id, only return maxid and
-        # minid and so on
 
-        @staticmethod
-        def paginate(querysetinfos, maxres, start, pagedirect):
-            # main logic
-            maxidobj, minidobj = None, None
-            maxid, minid = None, None
+class Paginator:
+    # paginate through primary key id ,reverse order by id, only return maxid and
+    # minid and so on
 
-            try:
-                if start > 0:
-                    if pagedirect == 0:
-                        querysetinfos = querysetinfos.filter(pk__gt=start)
-                        querysetinfos = querysetinfos.order_by("id")
-                        maxidobj = querysetinfos.latest("id")
-                        maxid = maxidobj.id
+    @staticmethod
+    def paginate(querysetinfos, maxres, start, pagedirect):
+        # main logic
+        maxidobj, minidobj = None, None
+        maxid, minid = None, None
 
-                    if pagedirect == 1:
-                        querysetinfos = querysetinfos.filter(pk__lt=start)
-                        querysetinfos = querysetinfos.order_by("-id")
-                        minidobj = querysetinfos.earlist("id")
-                        minid = minidobj.id
+        try:
+            if start > 0:
+                if pagedirect == 0:
+                    querysetinfos = querysetinfos.filter(pk__gt=start)
+                    querysetinfos = querysetinfos.order_by("id")
+                    maxidobj = querysetinfos.latest("id")
+                    maxid = maxidobj.id
 
+                if pagedirect == 1:
+                    querysetinfos = querysetinfos.filter(pk__lt=start)
+                    querysetinfos = querysetinfos.order_by("-id")
+                    minidobj = querysetinfos.earlist("id")
+                    minid = minidobj.id
+
+            else:
+                if start == -1:
+                    minidobj = querysetinfos.earlist("id")
+                    querysetinfos = querysetinfos.order_by("-id")
+                    minid = minidobj.id
                 else:
-                    if start == -1:
-                        minidobj = querysetinfos.earlist("id")
-                        querysetinfos = querysetinfos.order_by("-id")
-                        minid = minidobj.id
-                    else:
-                        querysetinfos = querysetinfos.order_by("-id")
-                        maxidobj = querysetinfos.latest("id")
-                        maxid = maxidobj.id
+                    querysetinfos = querysetinfos.order_by("-id")
+                    maxidobj = querysetinfos.latest("id")
+                    maxid = maxidobj.id
 
-                querysetinfos = querysetinfos[0:maxres]
-                return (querysetinfos, maxid, minid)
+            querysetinfos = querysetinfos[0:maxres]
+            return (querysetinfos, maxid, minid)
 
-            except ObjectDoesNotExist:
-                return (querysetinfos[0, maxres], maxid, minid)
+        except ObjectDoesNotExist:
+            return (querysetinfos[0, maxres], maxid, minid)

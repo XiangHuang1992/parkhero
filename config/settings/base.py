@@ -75,8 +75,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "parkhero.users.apps.UsersConfig",
     "parkhero.parking.apps.ParkingConfig",
-    "parkhero.o2ohandlers.apps.O2OhandlersConfig",
-    "parkhero.operation.apps.OperationConfig"
+    "parkhero.operation.apps.OperationConfig",
+    "parkhero.billing.apps.BillingConfig"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
