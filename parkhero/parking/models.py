@@ -7,7 +7,7 @@ import architect
 User = get_user_model()
 
 
-class ParkingLot(models.Model):
+class ParkLot(models.Model):
     COMMON_PARKING_LOT = "CP"
     SMART_PARKING_LOT = "SP"
     RODE_SIDE_PARKING_LOT = "RP"
@@ -47,7 +47,7 @@ class ParkingLot(models.Model):
 
 
 class ParkingLotExtra(models.Model):
-    parklot = models.ForeignKey("ParkingLot", on_delete=models.CASCADE)
+    parklot = models.ForeignKey("ParkLot", on_delete=models.CASCADE)
     parkspace_available = models.IntegerField(default=None, null=None)
     login_time = models.DateTimeField(default=None, null=None)
     heartbeat_time = models.DateTimeField(default=None, null=None)
@@ -59,7 +59,7 @@ class ParkingLotExtra(models.Model):
 
 
 class VehicleIn(models.Model):
-    parklot = models.ForeignKey("ParkingLot", on_delete=models.CASCADE)
+    parklot = models.ForeignKey("ParkLot", on_delete=models.CASCADE)
     plate_number = models.CharField(null=True, max_length=15, default=None)
     parkcard_num = models.CharField(null=True, max_length=20, default=None)
     cardgenre = models.CharField(null=True, max_length=15, default=None)
@@ -83,23 +83,13 @@ class VehicleIn(models.Model):
 
 # 该装饰器的功能是对数据库表分区
 @architect.install(
-    "partition",
-    type="range",
-    subtype="date",
-    constraint="month",
-    column="created_time",
+    "partition", type="range", subtype="date", constraint="month", column="created_time"
 )
 class VehicleInOut(models.Model):
-    parklot = models.ForeignKey("ParkingLot", on_delete=models.CASCADE)  # 停车场
-    plate_number = models.CharField(
-        null=True, max_length=15, default=None
-    )  # 车牌号
-    park_card_num = models.CharField(
-        null=True, max_length=20, default=None
-    )  # 停车卡号
-    card_type = models.CharField(
-        null=True, max_length=15, default=None
-    )  # 类型，卡类型
+    parklot = models.ForeignKey("ParkLot", on_delete=models.CASCADE)  # 停车场
+    plate_number = models.CharField(null=True, max_length=15, default=None)  # 车牌号
+    park_card_num = models.CharField(null=True, max_length=20, default=None)  # 停车卡号
+    card_type = models.CharField(null=True, max_length=15, default=None)  # 类型，卡类型
     parking_space_total = models.IntegerField(default=0)  # 该停车场的总车位数
     created_time = models.DateTimeField(db_index=True)  # record created
     user = models.ForeignKey(
@@ -134,7 +124,7 @@ class ParkingGate(models.Model):
     gatetype = models.PositiveSmallIntegerField()  # 1. 入口  2. 出口 3. 出入口
     getename = models.CharField(max_length=20, null=True, default=None)
     isdefault = models.BooleanField(default=True)
-    parklot = models.ForeignKey("ParkingLot", on_delete=models.CASCADE)
+    parklot = models.ForeignKey("ParkLot", on_delete=models.CASCADE)
 
     class Meta:
         db_table = "parking_parkgate"
