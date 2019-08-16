@@ -23,19 +23,74 @@ CACHES = {
     }
 }
 
+# Logging 配置
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'special': {
+            '()': 'project.logging.SpecialFilter',
+            'foo': 'bar',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['special']
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'parkhero.custom': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+            'filters': ['special']
+        }
+    }
+}
+
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
-    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+    "DJANGO_EMAIL_BACKEND",
+    default="django.core.mail.backends.console.EmailBackend",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-host
 EMAIL_HOST = "smtp.163.com"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'lucashuang1992@163.com'
-EMAIL_HOST_PASSWORD = 'hx15502040571'
+EMAIL_HOST_USER = "lucashuang1992@163.com"
+EMAIL_HOST_PASSWORD = "hx15502040571"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # django-debug-toolbar
@@ -67,4 +122,14 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-eager-propagates
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
+
+# parkhero system side config setting
+
+SERVER_IP = "127.0.0.1"
+BASE_URL = "http://" + SERVER_IP + "parkhero"
+
+# mqtt config
+MQTTAUTH = {"username": "parkhero", "password": "123456"}
+MQTTHOST = "127.0.0.1"
+
 # ------------------------------------------------------------------------------
