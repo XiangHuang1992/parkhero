@@ -12,16 +12,14 @@
 # ======================================================
 """
 from parkhero.common.paginator import Paginator
-from parkhero.parking.models import ParkingGate, ParkingLot
+from ..models import ParkLot, ParkingGate
 
 
 class DalParkLots:
-    parklots_infos = ParkingLot.objects
+    parklots_infos = ParkLot.objects
 
     @classmethod
-    def simple(
-        cls, parklotid=None, identifier=None, is_active=None, parklotname=None
-    ):
+    def simple(cls, parklotid=None, identifier=None, is_active=None, parklotname=None):
         parklots_infos = cls.parklots_infos
 
         if parklotid:
@@ -80,9 +78,7 @@ class DalParkLots:
         if maxres is None or startindex is None or pagedirect is None:
             return parklot_infos, None, None
 
-        return Paginator.paginate(
-            parklot_infos, maxres, startindex, pagedirect
-        )
+        return Paginator.paginate(parklot_infos, maxres, startindex, pagedirect)
 
 
 class DalParkGate:
