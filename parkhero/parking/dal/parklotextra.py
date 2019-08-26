@@ -11,7 +11,7 @@
 # ======================================================
 """
 
-from parkhero.parking.models import ParkingLotExtra
+from ..models import ParkingLotExtra
 
 
 class DalParkLotExtra:
@@ -22,13 +22,9 @@ class DalParkLotExtra:
         parklotextra_infos = ParkingLotExtra.objects
 
         if parklotids and not isinstance(parklotids, list):
-            parklotextra_infos = parklotextra_infos.filter(
-                parklot_id=parklotids
-            )
+            parklotextra_infos = parklotextra_infos.filter(parklot_id=parklotids)
         if parklotids and isinstance(parklotids, list):
-            parklotextra_infos = parklotextra_infos.filter(
-                parklot_id__in=parklotids
-            )
+            parklotextra_infos = parklotextra_infos.filter(parklot_id__in=parklotids)
 
         return parklotextra_infos
 
