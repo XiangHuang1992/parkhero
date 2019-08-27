@@ -1,6 +1,6 @@
 [[source]]
 name = "pypi"
-url = "https://pypi.org/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
 
 [dev-packages]
@@ -54,6 +54,7 @@ Pillow = "==6.1.0"
 rsa = "*"
 architect = "*"
 paho-mqtt = "*"
+django-guardian = "*"
 
 [requires]
 python_version = "3.6"
