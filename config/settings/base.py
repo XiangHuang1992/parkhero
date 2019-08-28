@@ -26,7 +26,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "Asia/shanghai"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "zh-Hans"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -42,9 +42,7 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///parkhero")
-}
+DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///parkhero")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
@@ -77,6 +75,10 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "parkhero.users.apps.UsersConfig",
+    "parkhero.account.apps.AccountConfig",
+    "parkhero.parking.apps.ParkingConfig",
+    "parkhero.operation.apps.OperationConfig",
+    "parkhero.billing.apps.BillingConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
